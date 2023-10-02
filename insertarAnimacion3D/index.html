@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+
+    <title>A-Frame 3D Objects</title>
+</head>
+<body>
+    
+    <a-scene>
+        <a-assets>
+            <!-- Carga los modelos .glb aquí -->
+            <a-asset-item id="model1" src="https://cdn.glitch.me/3134b3c1-bf13-4a0a-b007-93462366021f/Dragon%20animation%20flying.glb?v=1696264983405"></a-asset-item>
+        </a-assets>
+
+        <!-- Coloca los modelos en la escena -->
+        <a-entity gltf-model="#model1" position="-2 0 -5" scale="5 5 5" animation="property: rotation; dur: 10000;
+                       to: 0 360 0; loop: true" animation-mixer></a-entity>
+    </a-scene>
+
+    
+</body>
+</html>
