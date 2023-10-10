@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="audioguia.js"></script>
+    <script type="module" src="https://threejs.org/build/three.module.js"></script>
+    <title>Componente Sound</title>
+</head>
+<body>
+    
+    <a-scene>
+        <a-assets>
+            <img id="sky" crossorigin="anonymous" src="https://cdn.glitch.global/1af37079-3260-4d55-b188-31a447953179/pano-360-playa-maspalomas-7d199fec-3b23-401e-9789-6b1598664323.jpg?v=1696948528803">
+            <a-asset-item id="model1" src="https://cdn.glitch.me/e2917c84-343b-413b-8ad7-526cca97a531/mercedes_amg_gt.glb?v=1696260537671"></a-asset-item>
+            <a-asset-item id="model2" src="https://cdn.glitch.me/e2917c84-343b-413b-8ad7-526cca97a531/Sarcosuchus.glb?v=1696260557569"></a-asset-item>
+            <a-asset-item id="model3" src="https://cdn.glitch.global/e2917c84-343b-413b-8ad7-526cca97a531/BabyElephant_GLB.glb?v=1696260566122"></a-asset-item>  
+            <a-asset-item id="model4" src="https://cdn.glitch.global/1af37079-3260-4d55-b188-31a447953179/skull_downloadable.glb?v=1696951066217"></a-asset-item>  
+
+      </a-assets>
+
+        <a-sky src="#sky"></a-sky>
+
+        <a-entity id="coche" gltf-model="#model1" position="-75 0 -10" sound="src: https://cdn.glitch.global/1af37079-3260-4d55-b188-31a447953179/kit-auto-fantastico-series-tv-.mp3?v=1696955843321; autoplay: false; loop: false; " audioguia></a-entity>
+        <a-entity id="cocodrilo"  gltf-model="#model2" position="40 0 -140" scale="9 9 9" sound="src: https://cdn.glitch.global/1af37079-3260-4d55-b188-31a447953179/shrek-somebodycena.mp3?v=1696955850419; autoplay: false; loop: false; " audioguia></a-entity>
+        <a-entity id="elefante" gltf-model="#model3" position="-180 0 100" sound="src: https://cdn.glitch.global/1af37079-3260-4d55-b188-31a447953179/j-balvin-safari.mp3?v=1696955837442; autoplay: false; loop: false; " audioguia></a-entity>
+        <a-entity id="calavera" gltf-model="#model4" position="60 0 40" scale="2 2 2" sound="src: https://cdn.glitch.global/1af37079-3260-4d55-b188-31a447953179/ringtones-halloween.mp3?v=1696955847570; autoplay: false; loop: false; " audioguia></a-entity>
+        <a-entity id="camera1" camera look-controls wasd-controls></a-entity>  
+  </a-scene>
+
+    
+</body>
+</html>
+
