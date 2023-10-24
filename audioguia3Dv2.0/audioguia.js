@@ -1,12 +1,19 @@
+function calculateDistance(pos1, pos2){
+  return pos1.distanceTo(pos2);
+  
+}
+
 AFRAME.registerComponent('audioguia', {
   schema: {
     position: { type: 'vec3', default: { x: 0, y: 0, z: 0 } },
     camera: { type: 'selector', default: '' },
     sound: { type: 'selector', default: '' }
   },
-
+  // Pasa la función calculateDistance al componente como un método
+  calculateDistance: calculateDistance,
+  
   init: function () {
-    console.log('ESTOY EN INIT')
+    // console.log('ESTOY EN INIT')
     this.soundPlaying = false;
     //me hago una copia del valor porque si no se actualiza automaticamente porque ambas variables apuntan al mismo objeto en la memoria
     this.prevCamPos = new THREE.Vector3().copy(this.data.camera.object3D.position);
@@ -24,23 +31,23 @@ AFRAME.registerComponent('audioguia', {
     this.frameCount++;
     
     if (this.frameCount >= this.framesToSkip) {
-      console.log('La función tick se ejecutó');
+      // console.log('La función tick se ejecutó');
       var elemPos = this.data.position;
       var camPosNow = this.data.camera.object3D.position;
-      console.log('Posición del objeto camPosNow:', camPosNow.x, camPosNow.y, camPosNow.z);
-      console.log('Posición del objeto prevCamPos FINAL:', this.prevCamPos.x, this.prevCamPos.y, this.prevCamPos.z);
+      // console.log('Posición del objeto camPosNow:', camPosNow.x, camPosNow.y, camPosNow.z);
+      // console.log('Posición del objeto prevCamPos FINAL:', this.prevCamPos.x, this.prevCamPos.y, this.prevCamPos.z);
       if (camPosNow.x !== this.prevCamPos.x || camPosNow.y !== this.prevCamPos.y || camPosNow.z !== this.prevCamPos.z) {
-        console.log('ME HE MOVIDO')
-        let distance = camPosNow.distanceTo(elemPos);
-
+        // console.log('ME HE MOVIDO')
+        var distance = this.calculateDistance(camPosNow,elemPos);
+        // console.log('HE CALCULADO LA DISTANCIA')
         if (distance < 10 && !this.soundPlaying) {
-          console.log("ESTOY CERCA DEL ELEMENTO");
+          // console.log("ESTOY CERCA DEL ELEMENTO");
           this.data.sound.play();
           this.soundPlaying = true;
         }
 
         if (distance >= 10 && this.soundPlaying) {
-          console.log("ME ALEJÉ DEL ELEMENTO");
+          // console.log("ME ALEJÉ DEL ELEMENTO");
           this.data.sound.pause();
           this.soundPlaying = false;
         }
