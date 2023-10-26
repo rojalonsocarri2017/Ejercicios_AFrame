@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script type="module" src="https://threejs.org/build/three.module.js"></script>
+    <script src="script.js"></script>
+    
+    <title>Componente Sonido, Iluminacion, Opacidad y por tiempo</title>
+</head>
+<body>
+    
+    <a-scene>
+        <a-assets>
+            <img id="sky" crossorigin="anonymous" src="https://cdn.jsdelivr.net/gh/rojalonsocarri2017/Ejercicios_AFrame/audioguia3D/cielo2.jpg">
+            <a-asset-item id="model1" src="https://cdn.glitch.me/9647b0d7-5f4a-409d-869d-01d30bfde11a/mercedes_amg_gt.glb?v=1698159545516"></a-asset-item>
+            <a-asset-item id="model2" src="https://cdn.jsdelivr.net/gh/rojalonsocarri2017/Ejercicios_AFrame/audioguia3D/BabyElephant_GLB.glb"></a-asset-item>
+<!--                       <a-asset-item id="model2" src="https://cdn.jsdelivr.net/gh/rojalonsocarri2017/Ejercicios_AFrame/audioguia3D/Sarcosuchus.glb"></a-asset-item>
+ -->
+            <a-asset-item id="model3" src="https://cdn.jsdelivr.net/gh/rojalonsocarri2017/Ejercicios_AFrame/audioguia3D/BabyElephant_GLB.glb"></a-asset-item>  
+            <a-asset-item id="model4" src="https://cdn.jsdelivr.net/gh/rojalonsocarri2017/Ejercicios_AFrame/audioguia3D/skull_downloadable.glb"></a-asset-item>  
+            <a-asset-item id="model5" src="https://cdn.jsdelivr.net/gh/rojalonsocarri2017/Ejercicios_AFrame/ejercicioComponentes/caution_wet_floor__cleaning_sign_v2.glb"></a-asset-item>  
+          
+            <audio id="audio1" crossorigin="anonymous" src="https://cdn.jsdelivr.net/gh/rojalonsocarri2017/Ejercicios_AFrame/audioguia3D/j-balvin-safari.mp3"></audio>
+            <audio id="audio2" crossorigin="anonymous" src="https://cdn.jsdelivr.net/gh/rojalonsocarri2017/Ejercicios_AFrame/audioguia3D/ringtones-halloween.mp3"></audio>
+            <audio id="audio3" crossorigin="anonymous" src="https://cdn.jsdelivr.net/gh/rojalonsocarri2017/Ejercicios_AFrame/audioguia3D/kit-auto-fantastico-series-tv-.mp3"></audio>
+            <audio id="audio4" crossorigin="anonymous" src="https://cdn.jsdelivr.net/gh/rojalonsocarri2017/Ejercicios_AFrame/audioguia3D/shrek-somebodycena.mp3"></audio>
+      </a-assets>
+
+        <a-sky src="#sky"></a-sky>
+
+        <a-entity id="coche" gltf-model="#model1" position="-75 0 -10" sound="src: #audio3; autoplay: false; loop: false; " distance="position: -75 0 -10; camera: #camera1; distanceLimit: 10" sonido="sound: #audio3;"></a-entity>
+        <a-entity id="elefante"  gltf-model="#model2" position="40 0 -140" sound="src: #audio4; autoplay: false; loop: false; " distance="position: 40 0 -140; camera: #camera1; distanceLimit: 10" sonido="sound: #audio4;"></a-entity>
+        <a-entity id="cocodrilo" gltf-model="#model3" position="-180 0 100" sound="src: #audio1; autoplay: false; loop: false; " distance="position: -180 0 100; camera: #camera1; distanceLimit: 10" sonido="sound: #audio1;"></a-entity>
+        <a-entity id="calavera" gltf-model="#model4" position="60 0 40" scale="2 2 2" sound="src: #audio2; autoplay: false; loop: false;" distance="position: 60 0 40; camera: #camera1; distanceLimit: 10" sonido="sound: #audio2;"></a-entity>
+        <a-entity id="camera1" camera look-controls wasd-controls></a-entity>  
+        <a-entity id="cubo" position="20 0 0" color="red" geometry="primitive: box; width: 2; height: 2; depth: 2" distance="position: 20 0 0; camera: #camera1; distanceLimit: 10" iluminacion></a-entity>
+        <a-entity id="sphere" position="20 0 80" color="green" geometry="primitive: sphere; width: 2; height: 2; depth: 2" material="color: #e61919; opacity: 0" distance="position: 20 0 80; camera: #camera1; distanceLimit: 30" opacity></a-entity>
+        
+<!--         POR QUE NO SE ME APLICA LA OPACIDAD EN ESTE MODELO DESCARGADO?? -->
+<!--         <a-entity id="caution" gltf-model="#model5" position="20 0 80" scale="0.1 0.1 0.1"  distance="position: 20 0 80; camera: #camera1; distanceLimit: 10" opacity></a-entity> -->
+        
+      <!-- Componente 'tiempo' -->
+      <a-entity tiempo></a-entity>
+
+      <!-- Texto que se mostrará cada 5 segundos -->
+      <a-entity
+        text="value: +5; color: green; align: center; wrapCount: 10; width: 4;"
+        position="0 2 -5"
+        scale="2 2 2"
+        visible="false"
+        id="textoTiempo"
+      ></a-entity>
+      
+  </a-scene>
+
+    
+</body>
+</html>
+
