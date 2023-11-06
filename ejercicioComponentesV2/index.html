@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script type="module" src="https://threejs.org/build/three.module.js"></script>
+    <script src="script.js"></script>
+    <title>Componente Sonido, Iluminacion, Opacidad y por tiempo [VERSION 2]</title>
+  </head>
+  <body>
+
+    <a-scene>
+      <a-assets>
+          <audio id="audio1" crossorigin="anonymous" src="https://cdn.jsdelivr.net/gh/rojalonsocarri2017/Ejercicios_AFrame/audioguia3D/j-balvin-safari.mp3"></audio>
+      
+      </a-assets>
+      <a-sky color="#FFFFFF"></a-sky>
+<!--       <a-plane position="0 -4 -4" rotation="-90 0 0" color="#7BC8A4" scale="10000 10000 1" shadow="receive: true"></a-plane> -->
+      <a-entity id="camera1" camera look-controls wasd-controls></a-entity> 
+      <a-entity light="type: ambient; intensity:0.2"></a-entity>
+      <a-entity id="luzCilindro" light="type: point; intensity:0.2; distance:7 castShadow: true;"
+                position="2.22 1.84 1" decay="1"></a-entity>
+      
+
+      <a-box id="cubo" position="-6 0 -4" rotation="0 45 0" color="#4CC3D9" 
+             sound="src: #audio1; autoplay: false; loop: false; " 
+             distance="camera: #camera1; distanceLimit: 4" 
+             sonido_interruptor></a-box>
+      <a-sphere id="esfera" position="0 0 -15" radius="1.25" color="#EF2D5E" 
+                material="opacity: 0.1"  distance="camera: #camera1; distanceLimit: 8" 
+                opacidad_interruptor ></a-sphere>
+      <a-cylinder id="clindro" position="3 0 -5" radius="0.5" height="1.5" color="#FFC65D" 
+                  distance="camera: #camera1; distanceLimit: 4" shadow="cast: true"
+                  luz_interruptor></a-cylinder>
+
+      <a-entity
+        text="value: +5; color: green; align: center; wrapCount: 10; width: 4;"
+        position="0 2 -5"
+        scale="2 2 2"
+        visible="false"
+        id="textoTiempo"
+      tiempo></a-entity>
+    </a-scene>
+  </body>
+</html>
