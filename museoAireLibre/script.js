@@ -73,22 +73,32 @@ document.addEventListener('DOMContentLoaded', function () {
         var el = this.el;
         document.addEventListener('activarTextoSonido', function(event) {
 
-          const boton = document.getElementById('textoActivarSonido');
-          boton.setAttribute('visible', 'true');
+          const botonActivar = document.getElementById('textoActivarSonido');
+          botonActivar.setAttribute('visible', 'true');
+          const textoActivar = document.getElementById('textoActivar');
+
 
 
           // Accede al componente de sonido
           var audio = document.querySelector(el.components.sound.attrValue.src);
           console.log('RAC AUDIO 55: ' + audio);
-
+          var isPlay = false;
           el.addEventListener('click', function(event) {
             console.log('CLICCCCCCCCCC')
-            if (audio.isPlaying) {
+            console.log('isPlay ' + isPlay)
+            
+            if (isPlay) {
               audio.pause();
               console.log('Audio pausado');
+              isPlay = false;
+              botonActivar.setAttribute('color', 'green');
+              textoActivar.setAttribute('value', 'Activar sonido');
             } else {
               audio.play();
               console.log('Audio activado');
+              isPlay = true;
+              botonActivar.setAttribute('color', 'red');
+              textoActivar.setAttribute('value', 'Parar sonido');
             }
           });
       });
@@ -129,14 +139,8 @@ document.addEventListener('DOMContentLoaded', function () {
       var valorAtributo = atributosElemento[i].value;
       console.log('Atributo:', nombreAtributo, 'Valor:', valorAtributo);
       if(nombreAtributo === 'interruptor_texto'){
-
         elemento.sceneEl.emit('activarTextoSonido');
 
-
-      }else if(nombreAtributo === 'sonido_interruptor'){
-        console.log('ACTIVO SONIDO')
-        let audio = document.querySelector(elemento.components.sound.attrValue.src);
-        audio.play();
       }else if(nombreAtributo === 'opacidad_interruptor'){
         console.log('ACTIVO OPACIDAD')
         if(distance >= 12){
@@ -176,12 +180,11 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log('Atributo:', nombreAtributo, 'Valor:', valorAtributo);
       if(nombreAtributo === 'interruptor_texto'){
         elemento.sceneEl.emit('desactivarTextoSonido');
-
-
-      }else if(nombreAtributo === 'sonido_interruptor'){
-        console.log('PARO SONIDO')    
-        let audio = document.querySelector(elemento.components.sound.attrValue.src);
+        var ele = document.getElementById('textoActivarSonido')
+        let audio = document.querySelector(ele.components.sound.attrValue.src);
         audio.pause();
+        console.log('HE DESACTIVADO AUDIO');
+        
       }else if(nombreAtributo === 'opacidad_interruptor'){
         elemento.setAttribute('material', 'opacity: 1');
       }else if(nombreAtributo === 'luz_interruptor'){
@@ -202,6 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('desactivarTextoSonido', function(event) {
     const boton = document.getElementById('textoActivarSonido');
     boton.setAttribute('visible', 'false');
+
 
   });
   
