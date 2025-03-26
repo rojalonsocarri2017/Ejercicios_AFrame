@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Spatial UI-PELICULAS</title>
+    <meta name="description" content="Spatial UI • A-Frame">
+    <script src="../../../dist/aframe-master.js"></script>
+    <script src="https://aframe.io/releases/1.4.4/aframe.min.js"></script>
+
+    <script src="ui-controller.js"></script>
+    <script src="../../js/spatial-ui/spatial-utils.js"></script>
+    <script src="../../js/spatial-ui/spatial-window.js"></script>
+    <script src="../../js/spatial-ui/spatial-modal.js"></script>
+    <script src="../../js/spatial-ui/spatial-modal-image.js"></script>
+    <script src="../../js/spatial-ui/spatial-button.js"></script>
+    <script src="../../js/spatial-ui/spatial-close-button.js"></script>
+    <script src="../../js/spatial-ui/spatial-hero-image.js"></script>
+    <script src="tile.js"></script>
+  </head>
+  <body>
+    <a-scene cursor="rayOrigin: mouse;" raycaster="objects: .tile, .start-button, .close-button , .trailer-button" ui-controller>
+      <a-assets>
+        <!-- <img id="salacine" src="salaCine.jpg"> -->
+        <a-mixin
+          id="tile" tile="width: 0.400; height: 0.285"
+          animation__scale="property: scale; to: 1.02 1.02 1.02; dur: 100; startEvents: mouseenter"
+          animation__scale_reverse="property: scale; to: 1 1 1; dur: 100; startEvents: mouseleave">
+        </a-mixin>
+        <a-mixin
+          id="focus-animation"
+          animation__scale="property: object3D.position.z; to: -0.05; dur: 100; startEvents: unfocused"
+          animation__scale_reverse="property: object3D.position.z; to: 0; dur: 100; startEvents: focused">
+        </a-mixin>
+        <!-- <img id="leaving-room" src="https://cdn.aframe.io/examples/spatial-input/leaving-room.jpg" crossorigin="anonymous"> -->
+        <img id="cine_claqueta" src="cine_claqueta2.jpg" crossorigin="anonymous">
+        <img id="playVideo" src="play.png" crossorigin="anonymous">
+        <img id="pauseVideo" src="pause.png" crossorigin="anonymous">
+        <a-asset-item id="theater-obj" src="theater.obj"></a-asset-item>
+
+        <!-- <video id="video1" src="https://www.youtube.com/watch?v=bjJvvrKl83M" crossorigin="anonymous" preload="auto"></video> -->
+        <!-- <video id="reyLeonVideo" src="reyLeonVideo.mp4" crossorigin="anonymous" loop="true"></video>
+        <video id="laVidaEsBellaVideo" src="laVidaEsBellaVideo.mp4" crossorigin="anonymous" loop="true"></video> -->
+
+
+      </a-assets>
+      
+
+
+      <a-entity id="totalPanel"> 
+      <a-entity position="0 1.7 -1">
+        <a-entity spatial-modal="width: 1.2; height: 0.72" visible="false">
+          <a-entity spatial-modal-image="width: 0.6; height: 0.72" position="-0.3 0 0.001"></a-entity>
+          <a-entity spatial-close-button="" position="0.55 0.31 0.001" class="close-button"></a-entity>
+          <a-text font="kelsonsans" class="movie-title" value="Mejores peliculas de la historia" align="left" width="0.75" position="0.03 0.2 0.001"></a-text>
+          <a-text font="kelsonsans" height="1" class="movie-synopsis" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." align="left" width="0.5" position="0.03 0.08 0.001"></a-text>
+        </a-entity>
+        
+
+        <!-- TITULO AL PRINCIPIO DEL POP UP -->
+        <a-entity mixin="focus-animation" spatial-window="width: 1.775; height: 1">
+          <a-entity spatial-hero-image="src: #cine_claqueta; width: 1.775; height: 1" position="0 0 0.001">
+            <!-- <a-entity spatial-close-button="" position="0.70 0.41 0.001" class="close-button"></a-entity> -->
+            <a-text font="kelsonsans" value="Mejores peliculas de la historia" align="center" width="2" position="0 0.29 0.001"></a-text>
+            <a-entity id="buttonAdelante" spatial-button="text: Adelante!" position="0 0.15 0.001" class="start-button"></a-entity>
+
+          </a-entity>
+
+          <a-entity id="image-grid" visible="false">
+            <a-entity id="trailer-button" spatial-button="text: Ver Trailer!; color:red" position="0.249 -0.112 0.067" class="trailer-button" visible="false"></a-entity>
+            
+            <!-- row -->
+            <a-entity
+              mixin="tile"
+              title="El Rey Leon (1994)"
+              synopsis="El Rey León de Disney, dirigida por Jon Favreau, viaja a la sabana africana, donde nace un futuro rey. Simba idolatra a su padre, el rey Mufasa, y se toma muy en serio su propio destino real. Pero no todos en el reino celebran la llegada del nuevo cachorro"
+              tile="src: reyLeon.jpg"
+              position="-0.6435 0.318 0.01"
+              >
+
+     
+            </a-entity>
+            <a-entity
+              mixin="tile"
+              title="La Naranja Mecanica (1971)"
+              synopsis="Basada en la novela de Anthony Burgess y ambientada en un futuro distópico, la cinta cuenta la historia de Alex (Malcolm McDowell), un joven extremadamente violento y apasionado de Beethoven que se dedica a aterrorizar a la población a través de palizas y violaciones que eleva a la categoría de arte."
+              tile="src: naranjaMecanica.jpg"
+              position="-0.2150 0.320 0.01"></a-entity>
+            <a-entity
+              mixin="tile"
+              title="Cantando bajo la lluvia (1952)"
+              synopsis="El ídolo del cine Don Lockwood pensaba que lo tenía todo en la vida: fama, fortuna y éxito hasta que conoce a la aspirante a actriz Kathy Selden. La joven y la llegada del cine sonoro revolucionarán la vida de Don."
+              tile="src: cantandoBajoLaLluvia.jpg"
+              position="0.2135 0.320 0.01"></a-entity>
+            <a-entity
+              mixin="tile"
+              title="Gladiator (2000)"
+              synopsis="El general romano Máximo es el hombre de confianza del emperador Marco Aurelio. Una buena relación que no gusta al hijo del dirigente, Cómodo, quien asesina al padre y condena al militar a la muerte. Sin embargo, Máximo escapa de la ejecución y se convierte en un esclavo. Así hará carrera como gladiador"
+              tile="src: gladiator.jpg"
+              position="0.6420 0.320 0.01"></a-entity>
+            <!-- row -->
+            <a-entity
+              mixin="tile"
+              title="El Padrino (1972)"
+              synopsis="Dirigida por Francis Ford Coppola, esta película sigue la vida de la familia Corleone en el mundo del crimen organizado. La historia gira en torno a la transición de poder entre el patriarca Vito Corleone y su hijo Michael"
+              tile="src: elPadrino.jpg"
+              position="-0.6435 0 0.01"></a-entity>
+            <a-entity
+              mixin="tile"
+              title="Cadena Perpetua (1994)"
+              synopsis="Basada en una novela de Stephen King, Frank Darabont dirige esta historia sobre un hombre injustamente encarcelado por asesinato. La película sigue su lucha por la redención y la libertad dentro de la prisión mientras forma vínculos con otros reclusos"
+              tile="src: cadenaPerpetua.jpg"
+              position="-0.2150 0 0.01"></a-entity>
+            <a-entity
+              mixin="tile"
+              title="Interstellar (2014)"
+              synopsis="\n\nDirigida por Cristopher Nolan, Al ver que la vida en la Tierra está llegando a su fin, un grupo de exploradores dirigidos por el piloto Cooper (McConaughey) y la científica Amelia (Hathaway) emprende una misión que puede ser la más importante de la historia de la humanidad: viajar más allá de nuestra galaxia para descubrir algún planeta en otra que pueda garantizar el futuro de la raza humana"
+              tile="src: interstelar.jpg"
+              position="0.2135 0 0.01"></a-entity>
+            <a-entity
+              mixin="tile"
+              title="La lista de Schindler (1993)"
+              synopsis="Steven Spielberg dirige esta historia real sobre Oskar Schindler, un empresario alemán que salva a judíos durante el Holocausto. La película muestra los actos de valentía y humanidad en medio de la tragedia y el horro"
+              tile="src: listaSchindler.jpg"
+              position="0.6420 0 0.01"></a-entity>
+
+            <!-- row -->
+            <a-entity
+              mixin="tile"
+              title="Pulp Fiction (1994)"
+              synopsis="Quentin Tarantino dirige esta historia entrelazada de crimen y violencia en Los Ángeles. Con un elenco estelar y diálogos ingeniosos, la película redefine el género del cine negro mientras explora temas de moralidad, redención y violencia"
+              tile="src: pulpFiction.jpg"
+              position="-0.6435 -0.320 0.01"></a-entity>
+            <a-entity
+              mixin="tile"
+              title="El caballero oscuro (2008)"
+              synopsis="Christopher Nolan dirige esta película de superhéroes, donde Batman se enfrenta al Joker. Con actuaciones magistrales y una trama oscura, la película explora la dualidad del héroe y el villano en una ciudad plagada de corrupción y caos."
+              tile="src: caballeroOscuro.jpg"
+              position="-0.2150 -0.320 0.01"></a-entity>
+            <a-entity
+              mixin="tile"
+              title="Forrest Gump (1994)"
+              synopsis="Robert Zemeckis dirige esta historia de Forrest Gump, un hombre con discapacidad intelectual que vive una vida extraordinaria. A través de momentos históricos clave, la película explora temas de amor, pérdida y destino mientras Forrest busca su lugar en el mundo"
+              tile="src: forrestGump.jpg"
+              position="0.2135 -0.320 0.01"></a-entity>
+            <a-entity
+              mixin="tile"
+              title="La vida es bella (1999)"
+              synopsis="La Segunda Guerra Mundial está a punto de estallar en Europa. Mientras tanto, Guido llega a un pueblo italiano con la intención de abrir una librería. Allí se enamora de la novia de un fascista italiano, Dora. Ésta sucumbirá a sus encantos y Guido consigue que se case con él"
+              tile="src: vidaBella.jpg"
+              position="0.6420 -0.320 0.01"></a-entity>
+          </a-entity>
+        </a-entity>
+      </a-entity>
+    </a-entity>
+
+    <a-entity
+      id="salaCine"    
+			obj-model="obj: #theater-obj;"
+			material="color:#333"
+			position="-1 -0.25 0"
+			scale="0.025 0.025 0.025"
+      visible="false"
+		>
+        <a-sky color="#222"></a-sky>
+        <a-entity id="videoControls">
+          <a-entity id="videoControlsPlay" spatial-hero-image="src: #playVideo; width: 1.775; height: 1" position="3.6 39 -74" rotation="0 0 0" scale="10 10w 1" visible="true">
+          </a-entity>
+          <a-entity id="videoControlsPause" spatial-hero-image="src: #pauseVideo; width: 1.775; height: 1" position="3.6 39 -74" rotation="0 0 0" scale="10 10 1" visible="false">
+          </a-entity>
+        </a-entity>
+
+        <a-video
+          id="videoPelicula"
+          width="8"
+          height= "2.75"
+          scale="40 40 0"
+          src=""
+          position="12 77 -187"
+          rotation="0 0 0">
+        </a-video>
+      </a-entity>
+
+      
+
+      <a-entity position="0 1.6 0" look-controls camera>
+        <a-entity class="camera-cursor"
+                  raycaster="objects: .tile, .start-button, .close-button, .trailer-button"
+                  cursor
+                  geometry="primitive: circle; radius: 0.005"
+                  material="color: #283644; shader: flat"
+                  position="0 0 -0.75"></a-entity>
+      </a-entity>
+      <a-entity hand-tracking-controls="hand: left"></a-entity>
+      <a-entity hand-tracking-controls="hand: right"></a-entity>
+    </a-scene>
+  </body>
+</html>
