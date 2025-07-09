@@ -1,0 +1,24 @@
+
+
+.panelUser {
+    width: auto;
+    background-color: blue;
+    text-align: center;
+    height: auto;
+  }
+
+.banderas {
+    display: flex;
+}
+
+.banderas img {
+    margin: 1px 14px;
+  }
+  
+.slidecontainer {
+width: 100%;
+}
+
+
+
+

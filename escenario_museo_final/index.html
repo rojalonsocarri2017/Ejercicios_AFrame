@@ -4,32 +4,69 @@
     <meta charset="UTF-8">
     <meta name="description" content="Habitación interactiva con A-Frame">
     <title>Museo en Realidad Virtual</title>
-    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-environment-component@1.3.4/dist/aframe-environment-component.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.2.0/dist/aframe-extras.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://supereggbert.github.io/aframe-htmlembed-component/dist/build.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
+    <!-- <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script> -->
+    <!-- <script src="https://unpkg.com/aframe-environment-component@1.3.4/dist/aframe-environment-component.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.2.0/dist/aframe-extras.min.js"></script> -->
     <script src="components/star-sky.js"></script>
     <script src="art-gallery.js"></script>
     <script src="figure.js"></script>
     <script src="components/aframe-lounge.js"></script>
     <script src="components/distance.js"></script>
     <script src="components/time.js"></script>
-    
+    <script src="index.js"></script>
+    <script src="components/aframe-gui.js"></script>
+    <script src="components/menu-panel.js"></script>
+
+    <a-asset-item id="iconfontsolid" src="assets/fonts/fa-solid-900.ttf"></a-asset-item>
+    <a-asset-item id="iconfontbrand" src="assets/fonts/fa-brands-400.ttf"></a-asset-item>
+    <a-asset-item id="textfont1" src="assets/fonts/PermanentMarker-Regular.ttf"></a-asset-item>
+    <a-asset-item id="textfont2" src="assets/fonts/PressStart2P-Regular.ttf"></a-asset-item>	
+    <a-asset-item id="textfont3" src="assets/fonts/Plaster-Regular.ttf"></a-asset-item>
+    <a-asset-item id="textfont4" src="assets/fonts/DiplomataSC-Regular.ttf"></a-asset-item>
+    <link rel="stylesheet" type="text/css" href="styles.css">
   </head>
   <body>
       <a-scene antialias: true; logarithmicDepthBuffer: true; colorManagement: true; sortObjects: true;>
       <a-assets>
           <a-asset-item id="model1" src="assets/car.glb"></a-asset-item>  
           <a-asset-item id="model2" src="assets/elephant.glb"></a-asset-item>
-          <a-asset-item id="model3" src="assets/skull.glb"></a-asset-item>
+          <a-asset-item id="catGLB" src="assets/cat.glb"></a-asset-item> 
+          <a-asset-item id="dogGLB" src="assets/dog.glb"></a-asset-item> 
+          <a-asset-item id="dragonGLB" src="assets/dragon.glb"></a-asset-item> 
+          <a-asset-item id="birdGLB" src="assets/bird.glb"></a-asset-item>
           <audio id="sound1" crossorigin="anonymous" src="sounds/sound1.mp3"></audio>
           <audio id="sound2" crossorigin="anonymous" src="sounds/sound2.mp3"></audio>
           <video id="movie1" crossorigin="anonymous" src="movies/movie1.mp4"></video>
+          <audio id="audio1" crossorigin="anonymous" src="sounds/Chatma.mp4"></audio>
+          <audio id="audio2" crossorigin="anonymous" src="sounds/banda1.mp4"></audio>
+          <audio id="audio3" crossorigin="anonymous" src="sounds/banda2.mp4"></audio>
+          <img id="espana" src="assets/espana.png" crossorigin="anonymous">
+          <a-asset-item id="textfont5" src="SIXTY.TTF"></a-asset-item>
       </a-assets>
+
+      <!-- <a-entity id="textoMuseo" position="0 2 0" text="value: BIENVENIDOS AL MUSEO; color: black; align: center; width: 5; zOffset: 0.1"></a-entity> -->
+      <a-entity id="textoMuseoContainer" position="10 2.5 39.75" rotation="0 -179 0"  visible="false">
+        <a-plane width="10" height="1" color="#000000" opacity="1"></a-plane>
+        <a-entity
+          id="textoMuseo"
+          text="value: ; color: white; align: center; width: 4;"
+          position="0 0 0.01"
+        ></a-entity>
+      </a-entity>
+
+      <a-entity id="cat" gltf-model="#catGLB" position="0 3.6 -5" scale="0.1 0.1 0.1 " visible="false" animation__rotate="property: rotation; to: 0 360 0; loop: true; dur: 10000"></a-entity>
+      <a-entity id="dog" gltf-model="#dogGLB" position="0 3.6 -5" scale="0.2 0.2 0.2 " visible="false" animation__rotate="property: rotation; to: 0 360 0; loop: true; dur: 10000"></a-entity>
+      <a-entity id="dragon" gltf-model="#dragonGLB" position="0 3.6 -5" scale="0.2 0.2 0.2 " visible="false" animation__rotate="property: rotation; to: 0 360 0; loop: true; dur: 10000"></a-entity>
+      <a-entity id="bird" gltf-model="#birdGLB" position="0 3.6 -5" scale="0.5 0.5 0.5 " visible="false" animation__rotate="property: rotation; to: 0 360 0; loop: true; dur: 10000"></a-entity>
 
       <!-- Iluminación -->
       <a-entity id="room-light" light="color: #ffffff; type: ambient; intensity: 0.85"></a-entity>
 
-      <a-entity id="lounge" position="5 0 0" position="0 0 0" lounge="width: 30; depth: 80; height: 10; ceiling: true; north: barrier; east: glass; south: wall; floorTexture: assets/floor-texture.jpg; wallTexture: assets/wall.jpg; ceilingTexture: assets/wall.jpg">
+      <a-entity id="lounge" position="0 0 0" lounge="width: 30; depth: 80; height: 10; ceiling: true; north: barrier; east: glass; south: wall; floorTexture: assets/floor-texture.jpg; wallTexture: assets/jeroglifico.jpg; ceilingTexture: assets/jeroglifico.jpg">
 
       <a-entity position="0 0 0" art-gallery="figures: #model1, #model2, #model3; names: Escultura 1, Escultura 2, Escultura 3">
           <!-- <a-entity figure="figure: #model1; name: Escultura 1; description: Descripcion de la escultura 1; scale: 1.2 1.2 1.2; text-scale: 7 7 7; text-position: 0 1.3 0; position= 3 0 20"   rotation="0 250 0" lounge-staydown></a-entity> -->
@@ -40,21 +77,199 @@
 
             <a-entity figure="figure: #model2; name: Escultura 2; description: Descripcion de la escultura 2; scale: 2 2 2; text-scale: 25 25 25; text-position: 0 6 0; position: -15.737 0 15" distance="camera: #camera1; distanceLimit: 20" lounge-staydown></a-entity>
             
-            <a-entity lounge-plinth="width: 2; depth: 2; height: 3; color: #808080" position="-5 0 30" lounge-staydown="offsetY: 1.5">
-              <a-entity figure="figure: #model3; name: Escultura 3; description: Descripcion de la escultura 3; scale: 1 1 1; text-scale: 55 55 55; text-position: 0 9 0;" position="0 -10 0" rotation="0 90 0" ></a-entity>
+            <a-entity lounge-plinth="width: 2; depth: 2; height: 1.5; color: #171515" position="-5 0 30" lounge-staydown="offsetY: 1.5">
+              <a-entity id="menu-button"
+                geometry="primitive: cylinder; radius: 0.6; height: 0.7"
+                material="color: red"
+                position="0 0.5 0"
+                rotation="0 0 0"
+                class="clickable"
+                menu-panel="panel: #user-panel; offsetY: 2.5; distance: 8"
+                >
+              </a-entity>
             </a-entity>
-            <!-- <a-entity figure="figure: #model3; name: Escultura 3; description: Descripcion de la escultura 3; scale: 2 2 2; text-scale: 55 55 55; text-position: 0 9 0; position: -5 0 30" rotation="0 90 0" lounge-plinth="width: 2; depth: 2; height: 3" animation="property: object3D.rotation.y; to: 360; dur: 5000; loop: true; easing: linear" lounge-staydown="offsetY: 1.5"></a-entity> -->
+            <a-gui-flex-container
+                id="user-panel" visible="false" flex-direction="column" justify-content="center" align-items="normal" component-padding="0.05"
+                opacity="1" width="5" height="9" panel-color="#BCDFF6" panel-rounded="0.3" 
+                >
+                <a-gui-icon-button 
+                  class="clickable"
+                  width="0.5" height="0.5"
+                  icon="f00d"
+                  icon-font="assets/fonts/fa-solid-900.ttf"
+                  icon-color="#fff"
+                  background-color="#ff6666"
+                  id="close-menu"
+                  margin="0.2 0 0 0"
+                  onclick="cerrarMenu()"
+                ></a-gui-icon-button>
+                <a-gui-label
+                  width="4.8" height="0.75"
+                  value="SONIDO"
+                  font-family="SIXTY.TTF"
+                  font-size="0.35"
+                  line-height="0.8"
+                  letter-spacing="0"
+                  margin="0 0 0.05 0"
+                >
+                </a-gui-label>
+                <a-gui-flex-container
+                flex-direction="row" justify-content="center" align-items="normal" component-padding="0.1"
+                opacity="0.5" panel-rounded="0" panel-color="#BCDFF6"
+                rotation="0 0 0"
+                >
+                <a-gui-radio
+                  class="clickable"
+                  width="1.5" height="0.75"
+                  onclick="seleccionarSonido('sonido1')"
+                  value="SONIDO 1"
+                  font-family="assets/fonts/Plaster-Regular.ttf"
+                  font-size="0.13"
+                  margin="0.05 0.05 0.05 0.05"
+                  
+                >
+                </a-gui-radio>
+                <a-gui-radio
+                  class="clickable"
+                  width="1.5" height="0.75"
+                  onclick="seleccionarSonido('sonido2')"
+                  value="SONIDO 2"
+                  font-family="assets/fonts/Plaster-Regular.ttf"
+                  font-size="0.13"
+                  margin="0.05 0.05 0.05 0.05"
+                >
+                </a-gui-radio>
+                <a-gui-radio
+                  class="clickable"
+                  width="1.5" height="0.75"
+                  onclick="seleccionarSonido('sonido3')"
+                  value="SONIDO 3"
+                  font-family="assets/fonts/Plaster-Regular.ttf"
+                  font-size="0.13"
+                  margin="0.05 0.05 0.05 0.05"
+                >
+                </a-gui-radio>
+              
+              </a-gui-flex-container>
+                <a-gui-label
+                    width="4.8" height="0.75"
+                    value="IDIOMA"
+                    font-family="SIXTY.TTF"
+                    font-size="0.35"
+                    line-height="0.8"
+                    letter-spacing="0"
+                    margin="0 0 0.05 0"
+                  ></a-gui-label>
+
+                  <a-gui-flex-container
+                flex-direction="row" justify-content="center" align-items="normal" component-padding="0.1"
+                opacity="0.5" panel-rounded="0" panel-color="#BCDFF6"
+                rotation="0 0 0"
+                >
+
+                <!-- Botón -->
+                <!-- <a-gui-button  width="1" height="0.5" onclick="testButtonAction" background-color="red" margin="0.05 0.05 0.05 0.05"></a-gui-button> -->
+                <a-gui-button class="clickable" onclick="seleccionarIdioma('es')" width="1" height="0.5" background-color="#ffffff"  margin="0.05 0.05 0.05 0.05">
+                  <a-image src="assets/espana.png" width="1" height="0.5"></a-image>
+                </a-gui-button>
+                <a-gui-button class="clickable" onclick="seleccionarIdioma('uk')" width="1" height="0.5" background-color="#ffffff" margin="0.05 0.05 0.05 0.05">
+                  <a-image src="assets/reinoUnido.png" width="1" height="0.5"></a-image>
+                </a-gui-button>
+                <a-gui-button class="clickable" onclick="seleccionarIdioma('pt')" width="1" height="0.5" background-color="#ffffff" margin="0.05 0.05 0.05 0.05">
+                  <a-image src="assets/portugal.png" width="1" height="0.5"></a-image>
+                </a-gui-button>
+                <a-gui-button class="clickable" onclick="seleccionarIdioma('de')" width="1" height="0.5" background-color="#ffffff"  margin="0.05 0.05 0.05 0.05">
+                  <a-image src="assets/alemania.png" width="1" height="0.5"></a-image>
+                </a-gui-button>
+              
+
+              </a-gui-flex-container>
+              <a-gui-label
+                  width="4.8" height="0.75"
+                  value="LUZ"
+                  font-family="SIXTY.TTF"
+                  font-size="0.35"
+                  line-height="0.8"
+                  letter-spacing="0"
+                  margin="0 0 0.05 0"
+                ></a-gui-label>
+                <a-gui-slider
+                  class="clickable"
+                  width="2.5" height="0.75"
+                  onclick="testSliderAction"
+                  percent="0.29"
+                  margin="0 0 0.05 0"
+                >
+                </a-gui-slider>
+
+                <a-gui-label
+                  width="4.8" height="0.75"
+                  value="MASCOTA"
+                  font-family="SIXTY.TTF"
+                  font-size="0.35"
+                  line-height="0.8"
+                  letter-spacing="0"
+                  margin="0 0 0.05 0"
+                ></a-gui-label>
+
+                <a-gui-flex-container
+                flex-direction="row" justify-content="center" align-items="normal" component-padding="0.1"
+                opacity="0.5" panel-rounded="0" panel-color="#BCDFF6"
+                rotation="0 0 0"
+                >
+
+                <a-gui-icon-button
+                  class="clickable"
+                  height="0.75"
+                  onclick="seleccionarMascota('cat')" key-code="32"
+                  icon="f6be"
+                  icon-font="assets/fonts/fa-solid-900.ttf"
+                  margin="0 0 0.05 0"
+                >
+                </a-gui-icon-button>
+                <a-gui-icon-button
+                  class="clickable"
+                  height="0.75"
+                  onclick="seleccionarMascota('dog')" key-code="32"
+                  icon="f6d3"
+                  icon-font="assets/fonts/fa-solid-900.ttf"
+                  margin="0 0 0.05 0"
+                >
+                </a-gui-icon-button>
+                <a-gui-icon-button
+                  class="clickable"
+                  height="0.75"
+                  onclick="seleccionarMascota('bird')" key-code="32"
+                  icon="f520"
+                  icon-font="assets/fonts/fa-solid-900.ttf"
+                  margin="0 0 0.05 0"
+                >
+                </a-gui-icon-button>
+                <a-gui-icon-button
+                  class="clickable"
+                  height="0.75"
+                  onclick="seleccionarMascota('dragon')" key-code="32"
+                  icon="f6d5"
+                  icon-font="assets/fonts/fa-solid-900.ttf"
+                  margin="0 0 0.05 0"
+                >
+                </a-gui-icon-button>
+
+              </a-gui-flex-container>   
+            </a-gui-flex-container>
       </a-entity>
 
-      <a-entity hand-tracking-controls="hand: left"></a-entity>
-      <a-entity hand-tracking-controls="hand: right"></a-entity>
+      <!-- <a-entity hand-tracking-controls="hand: left"></a-entity>
+      <a-entity hand-tracking-controls="hand: right"></a-entity> -->
       <a-entity lounge-entry-point>
-          <a-entity id="camera1" camera position="0 2 10" look-controls
+          <a-entity id="camera1" camera position="-10 2 20" look-controls raycaster="objects: .clickable"
+                    cursor="rayOrigin: mouse"
                     wasd-controls="fly: false">
           </a-entity>
       </a-entity>
       <a-sky color="black"></a-sky>
       <a-entity star-sky></a-entity>
+      <a-light id="luzEscenario" type="ambient" color="#ebd9e9" intensity="0.3"></a-light>
       
     </a-scene>
   </body>
