@@ -20,6 +20,7 @@
     <script src="index.js"></script>
     <script src="components/aframe-gui.js"></script>
     <script src="components/menu-panel.js"></script>
+    <script src="components/chatVoice.js"></script>
 
     <a-asset-item id="iconfontsolid" src="assets/fonts/fa-solid-900.ttf"></a-asset-item>
     <a-asset-item id="iconfontbrand" src="assets/fonts/fa-brands-400.ttf"></a-asset-item>
@@ -58,10 +59,10 @@
         ></a-entity>
       </a-entity>
 
-      <a-entity id="cat" gltf-model="#catGLB" position="0 3.6 -5" scale="0.1 0.1 0.1 " visible="false" animation__rotate="property: rotation; to: 0 360 0; loop: true; dur: 10000"></a-entity>
-      <a-entity id="dog" gltf-model="#dogGLB" position="0 3.6 -5" scale="0.2 0.2 0.2 " visible="false" animation__rotate="property: rotation; to: 0 360 0; loop: true; dur: 10000"></a-entity>
-      <a-entity id="dragon" gltf-model="#dragonGLB" position="0 3.6 -5" scale="0.2 0.2 0.2 " visible="false" animation__rotate="property: rotation; to: 0 360 0; loop: true; dur: 10000"></a-entity>
-      <a-entity id="bird" gltf-model="#birdGLB" position="0 3.6 -5" scale="0.5 0.5 0.5 " visible="false" animation__rotate="property: rotation; to: 0 360 0; loop: true; dur: 10000"></a-entity>
+      <a-entity id="cat" gltf-model="#catGLB" position="0 3.6 -5" scale="0.1 0.1 0.1 " rotation="0 180 0" visible="false"  chat-voice></a-entity>
+      <a-entity id="dog" gltf-model="#dogGLB" position="0 3.6 -5" scale="0.2 0.2 0.2 " rotation="0 180 0" visible="false"  chat-voice></a-entity>
+      <a-entity id="dragon" gltf-model="#dragonGLB" position="0 3.6 -5" rotation="0 180 0" scale="0.2 0.2 0.2 " visible="false"  chat-voice></a-entity>
+      <a-entity id="bird" gltf-model="#birdGLB" position="0 3.6 -5" scale="0.5 0.5 0.5 " rotation="0 180 0" visible="false"  chat-voice></a-entity>
 
       <!-- Iluminación -->
       <a-entity id="room-light" light="color: #ffffff; type: ambient; intensity: 0.85"></a-entity>
@@ -257,6 +258,7 @@
 
               </a-gui-flex-container>   
             </a-gui-flex-container>
+
       </a-entity>
 
       <!-- <a-entity hand-tracking-controls="hand: left"></a-entity>
@@ -270,7 +272,8 @@
       <a-sky color="black"></a-sky>
       <a-entity star-sky></a-entity>
       <a-light id="luzEscenario" type="ambient" color="#ebd9e9" intensity="0.3"></a-light>
-      
+      <a-text value="Hola dragón" position="0 2 0" color="white" width="4" side="double"></a-text>
+
     </a-scene>
   </body>
 </html>
